@@ -203,6 +203,7 @@
     EKPropertyMapping * primaryKeyMapping = [mapping primaryKeyPropertyMapping];
     id primaryValue = [EKPropertyHelper getValueOfManagedProperty:primaryKeyMapping
                                                fromRepresentation:representation
+                                                         onObject:nil
                                                         inContext:context];
     return primaryValue;
 }
@@ -247,6 +248,7 @@
 
     id primaryKeyValue = [EKPropertyHelper getValueOfManagedProperty:[mapping primaryKeyPropertyMapping]
                                                   fromRepresentation:representation
+                                                            onObject:nil
                                                            inContext:context];
     if (primaryKeyValue == nil || primaryKeyValue == NSNull.null) return nil;
 

@@ -96,7 +96,7 @@ static const char scalarTypes[] = {
 + (void)setProperty:(EKPropertyMapping *)propertyMapping onObject:(id)object
  fromRepresentation:(NSDictionary *)representation
 {
-    id value = [self getValueOfProperty:propertyMapping fromRepresentation:representation];
+    id value = [self getValueOfProperty:propertyMapping fromRepresentation:representation onObject:object];
     if (value == (id)[NSNull null]) {
         if (![self propertyNameIsScalar:propertyMapping.property fromObject:object]) {
             [self setValue:nil onObject:object forKeyPath:propertyMapping.property];
@@ -113,6 +113,7 @@ static const char scalarTypes[] = {
 {
     id value = [self getValueOfManagedProperty:propertyMapping
                             fromRepresentation:representation
+                                      onObject:object
                                      inContext:context];
     if (value == (id)[NSNull null]) {
         if (![self propertyNameIsScalar:propertyMapping.property fromObject:object]) {
@@ -161,11 +162,13 @@ static const char scalarTypes[] = {
     }
 }
 
-+ (id)getValueOfProperty:(EKPropertyMapping *)propertyMapping fromRepresentation:(NSDictionary *)representation
++ (id)getValueOfProperty:(EKPropertyMapping *)propertyMapping fromRepresentation:(NSDictionary *)representation onObject:(id)object
 {
     id value = nil;
     
-    if (propertyMapping.valueBlock) {
+    if (propertyMapping.objectValueBlock) {
+        propertyMapping.objectValueBlock(propertyMapping.keyPath, [representation valueForKeyPath:propertyMapping.keyPath], object);
+    } else if (propertyMapping.valueBlock) {
         value = propertyMapping.valueBlock(propertyMapping.keyPath, [representation valueForKeyPath:propertyMapping.keyPath]);
     }
     else {
@@ -177,11 +180,15 @@ static const char scalarTypes[] = {
 
 +(id)getValueOfManagedProperty:(EKPropertyMapping *)mapping
             fromRepresentation:(NSDictionary *)representation
+                      onObject:(id)object
                      inContext:(NSManagedObjectContext *)context
 {
     id value = nil;
     
-    if (mapping.managedValueBlock) {
+    if (mapping.managedObjectValueBlock) {
+        id representationValue = [representation valueForKeyPath:mapping.keyPath];
+        mapping.managedObjectValueBlock(mapping.keyPath, representationValue == [NSNull null] ? nil : representationValue, object, context);
+    } else if (mapping.managedValueBlock) {
         id representationValue = [representation valueForKeyPath:mapping.keyPath];
         value = mapping.managedValueBlock(mapping.keyPath, representationValue == [NSNull null] ? nil : representationValue,context);
     }

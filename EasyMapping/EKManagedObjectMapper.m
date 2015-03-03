@@ -134,6 +134,7 @@
         // Look up the object by its primary key
         id primaryKeyValue = [EKPropertyHelper getValueOfManagedProperty:primaryKeyPropertyMapping
                                                       fromRepresentation:representation
+                                                                onObject:nil
                                                                inContext:self.importer.context];
         id object = [existingByPK objectForKey:primaryKeyValue];
 

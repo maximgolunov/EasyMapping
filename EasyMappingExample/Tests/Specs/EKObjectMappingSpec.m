@@ -82,6 +82,10 @@ describe(@"EKObjectMapping", ^{
         });
         
         specify(^{
+            [[mapping should] respondToSelector:@selector(mapKeyPath:toProperty:withObjectValueBlock:)];
+        });
+        
+        specify(^{
             [[mapping should] respondToSelector:@selector(mapKeyPath:toProperty:withValueBlock:reverseBlock:)];
         });
         

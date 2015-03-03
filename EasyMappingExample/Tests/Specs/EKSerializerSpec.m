@@ -616,6 +616,37 @@ describe(@"EKSerializer", ^{
         });
     });
     
+    describe(@"CoreData object value mapping blocks", ^{
+        
+        beforeEach(^{
+            [MagicalRecord setDefaultModelFromClass:[self class]];
+            [MagicalRecord setupCoreDataStackWithInMemoryStore];
+        });
+        
+        context(@"object", ^{
+            
+            __block ManagedPerson * person = nil;
+            __block NSDictionary * representation = nil;
+            
+            beforeEach(^{
+                NSDictionary * info = [CMFixture buildUsingFixture:@"Person"];
+                NSManagedObjectContext * context = [NSManagedObjectContext MR_defaultContext];
+                
+                person = [EKManagedObjectMapper objectFromExternalRepresentation:info
+                                                                     withMapping:[ManagedMappingProvider personWithObjectValueBlockMapping]
+                                                          inManagedObjectContext:context];
+                representation = [EKSerializer serializeObject:person
+                                                   withMapping:[ManagedMappingProvider personWithReverseBlocksMapping]
+                                                   fromContext:context];
+            });
+            
+            specify(^{
+                [[person.gender should] equal:@"husband"];
+                [[[representation objectForKey:@"gender"] should] equal:@"male"];
+            });
+        });
+    });
+    
     context(@"Serialize non nested objects",^{
         
         __block Person * person = nil;

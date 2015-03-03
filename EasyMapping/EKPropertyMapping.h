@@ -45,6 +45,11 @@
 @property (nonatomic, strong) EKMappingValueBlock valueBlock;
 
 /**
+ Optional block to transform JSON value into objective-C object given the object being transformed to.
+ */
+@property (nonatomic, strong) EKMappingObjectValueBlock objectValueBlock;
+
+/**
  Optional block to serialize objective-c object into JSON representation.
  */
 @property (nonatomic, strong) EKMappingReverseBlock reverseBlock;
@@ -53,6 +58,11 @@
  Optional block to transform JSON value into CoreData object.
  */
 @property (nonatomic, strong) EKManagedMappingValueBlock managedValueBlock;
+
+/**
+ Optional block to transform JSON value into CoreData object given the object being transformed to.
+ */
+@property (nonatomic, strong) EKManagedMappingObjectValueBlock managedObjectValueBlock;
 
 /**
  Optional block to serialize CoreData object into JSON representation.

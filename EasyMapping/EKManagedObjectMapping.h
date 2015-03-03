@@ -44,6 +44,17 @@
 
 -(void)mapKeyPath:(NSString *)keyPath toProperty:(NSString *)property withValueBlock:(EKManagedMappingValueBlock)valueBlock;
 
+/**
+ Map JSON keyPath to CoreData object property, using objectValueBlock. Limitation - object value mapping block for primary keys may receive nil object.
+ 
+ @param keyPath JSON keypath, that will be used by valueForKeyPath: method
+ 
+ @param property Property name.
+ 
+ @param objectValueBlock block to transform JSON value into CoreData property value.
+ */
+-(void)mapKeyPath:(NSString *)keyPath toProperty:(NSString *)property withObjectValueBlock:(EKManagedMappingObjectValueBlock)objectValueBlock;
+
 -(void)mapKeyPath:(NSString *)keyPath toProperty:(NSString *)property
    withValueBlock:(EKManagedMappingValueBlock)valueBlock
      reverseBlock:(EKManagedMappingReverseValueBlock)reverseBlock;

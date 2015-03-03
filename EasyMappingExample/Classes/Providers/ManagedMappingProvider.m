@@ -138,6 +138,24 @@
     return personMapping;
 }
 
++(EKManagedObjectMapping *)personWithObjectValueBlockMapping
+{
+    EKManagedObjectMapping * personMapping = [self personWithCarMapping];
+    [personMapping mapKeyPath:@"gender" toProperty:@"gender"
+               withObjectValueBlock:^void(NSString *key, id value, id object, NSManagedObjectContext *context) {
+                   if ([value isEqualToString:@"male"])
+                   {
+                       [object setGender:@"husband"];
+                   }
+                   else if ([value isEqualToString:@"female"])
+                   {
+                       [object setGender:@"wife"];
+                   }
+               }];
+    
+    return personMapping;
+}
+
 + (EKManagedObjectMapping *)personWithCarMapping
 {
     return [EKManagedObjectMapping mappingForEntityName:NSStringFromClass([ManagedPerson class])

@@ -162,6 +162,19 @@ withValueBlock:(id (^)(NSString *, id))valueBlock
     [self addPropertyMappingToDictionary:mapping];
 }
 
+- (void)mapKeyPath:(NSString *)keyPath toProperty:(NSString *)property withObjectValueBlock:(EKMappingObjectValueBlock)objectValueBlock
+{
+    NSParameterAssert(keyPath);
+    NSParameterAssert(property);
+    NSParameterAssert(objectValueBlock);
+    
+    EKPropertyMapping *mapping = [[EKPropertyMapping alloc] init];
+    mapping.property = property;
+    mapping.keyPath = keyPath;
+    mapping.objectValueBlock = objectValueBlock;
+    [self addPropertyMappingToDictionary:mapping];
+}
+
 - (void)mapKeyPath:(NSString *)keyPath toProperty:(NSString *)property
 withValueBlock:(id (^)(NSString *, id))valueBlock reverseBlock:(id (^)(id))reverseBlock
 {

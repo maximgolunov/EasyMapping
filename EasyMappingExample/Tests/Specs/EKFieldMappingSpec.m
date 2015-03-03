@@ -31,11 +31,19 @@ describe(@"EKPropertyMapping", ^{
     });
     
     specify(^{
+        [[mapping should] respondToSelector:@selector(objectValueBlock)];
+    });
+    
+    specify(^{
         [[mapping should] respondToSelector:@selector(reverseBlock)];
     });
     
     specify(^{
         [[mapping should] respondToSelector:@selector(managedValueBlock)];
+    });
+    
+    specify(^{
+        [[mapping should] respondToSelector:@selector(managedObjectValueBlock)];
     });
     
     specify(^{

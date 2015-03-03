@@ -45,10 +45,12 @@ fromRepresentation:(NSDictionary *)representation;
            inContext:(NSManagedObjectContext *)context;
 
 + (id)getValueOfProperty:(EKPropertyMapping *)propertyMapping
-   fromRepresentation:(NSDictionary *)representation;
+      fromRepresentation:(NSDictionary *)representation
+                onObject:(id)object;
 
 + (id)getValueOfManagedProperty:(EKPropertyMapping *)mapping
              fromRepresentation:(NSDictionary *)representation
+                       onObject:(id)object
                       inContext:(NSManagedObjectContext *)context;
 
 + (void)setValue:(id)value onObject:(id)object forKeyPath:(NSString *)keyPath;

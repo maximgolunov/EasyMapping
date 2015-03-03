@@ -166,6 +166,18 @@
     withValueBlock:(EKMappingValueBlock)valueBlock;
 
 /**
+ Map JSON keyPath to object property, using objectValueBlock.
+ 
+ @param keyPath JSON keypath, that will be used by valueForKeyPath: method
+ 
+ @param property Property name.
+ 
+ @param objectValueBlock block to transform JSON value into property value.
+ */
+- (void)mapKeyPath:(NSString *)keyPath toProperty:(NSString *)property
+    withObjectValueBlock:(EKMappingObjectValueBlock)objectValueBlock;
+
+/**
  Map JSON keyPath to object property, using valueBlock. Include serialization block, that does reverse this operation.
  
  @param keyPath JSON keypath, that will be used by valueForKeyPath: method
