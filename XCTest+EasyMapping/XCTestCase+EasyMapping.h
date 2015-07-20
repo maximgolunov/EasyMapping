@@ -13,13 +13,13 @@
 @interface XCTestCase (EasyMapping)
 
 - (id)testObjectFromExternalRepresentation:(NSDictionary *)externalRepresentation
-                               withMapping:(EKObjectMapping *)mapping
-                            expectedObject:(id)expectedObject;
+                                        withMapping:(EKObjectMapping *)mapping
+                                     expectedObject:(id)expectedObject;
 
 - (id)testObjectFromExternalRepresentation:(NSDictionary *)externalRepresentation
-                               withMapping:(EKObjectMapping *)mapping
-                            expectedObject:(id)expectedObject
-                          skippingKeyPaths:(NSArray *)keyPathsToSkip;
+                                        withMapping:(EKObjectMapping *)mapping
+                                     expectedObject:(id)expectedObject
+                                   skippingKeyPaths:(NSArray *)keyPathsToSkip;
 
 - (NSDictionary *)testSerializeObject:(id)object
                           withMapping:(EKObjectMapping *)mapping

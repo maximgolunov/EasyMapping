@@ -37,6 +37,13 @@
 @property (nonatomic, assign) BOOL incrementalData;
 
 /**
+ If set to YES, mapper will introspect your class properties and try to create appropriate objects. Supported classes: NSMutableArray, NSMutableDictionary, NSSet, NSMutableSet, NSOrderedSet, NSMutableOrderedSet. 
+ 
+ Due to perfomance reasons, this property defaults to NO.
+ */
+@property (nonatomic, assign) BOOL respectPropertyFoundationTypes;
+
+/**
  Class, for which this mapping is meant to be used.
  */
 @property (nonatomic, assign, readwrite) Class objectClass;
@@ -123,7 +130,7 @@
  
  @param property Property name.
  
- @param dateFormatter Date formatter to use when transforming string to dates and reverse.
+ @param formatter Date formatter to use when transforming string to dates and reverse.
  */
 - (void)mapKeyPath:(NSString *)keyPath toProperty:(NSString *)property withDateFormatter:(NSDateFormatter *)formatter;
 
@@ -196,7 +203,7 @@
 /**
  Map to-one relationship for keyPath. Assuming keyPath and property name are equal. ObjectClass should conform to `EKMappingProtocol`.
  
- @param mapping mapping for child object
+ @param objectClass class for child object
  
  @param keyPath keyPath to child object representation in JSON
  */
@@ -205,7 +212,7 @@
 /**
  Map to-one relationship for keyPath. ObjectClass should conform to `EKMappingProtocol`.
  
- @param mapping mapping for child object
+ @param objectClass class for child object
  
  @param keyPath keyPath to child object representation in JSON
  
@@ -248,7 +255,7 @@ forDictionaryFromKeyPaths:(NSArray *)keyPaths
 /**
  Map to-many relationship for keyPath. Assuming keyPath and property name are equal. ObjectClass should conform to `EKMappingProtocol`.
  
- @param mapping mapping for child objects
+ @param objectClass objectClass for child objects
  
  @param keyPath keyPath to child object representations in JSON
  */
@@ -257,7 +264,7 @@ forDictionaryFromKeyPaths:(NSArray *)keyPaths
 /**
  Map to-many relationship for keyPath. ObjectClass should conform to `EKMappingProtocol`.
  
- @param mapping mapping for child objects
+ @param objectClass objectClass for child objects
  
  @param keyPath keyPath to child objects representation in JSON
  

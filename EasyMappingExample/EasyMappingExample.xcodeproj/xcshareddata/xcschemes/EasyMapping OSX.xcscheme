@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "02FF772518E32249002282D3"
-               BuildableName = "iOS Tests.xctest"
-               BlueprintName = "iOS Tests"
+               BlueprintIdentifier = "9A2A38041AEA5A170021E97D"
+               BuildableName = "EasyMapping.framework"
+               BlueprintName = "EasyMapping OSX"
+               ReferencedContainer = "container:EasyMappingExample.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9A2A380E1AEA5A170021E97D"
+               BuildableName = "EasyMapping OSXTests.xctest"
+               BlueprintName = "EasyMapping OSXTests"
                ReferencedContainer = "container:EasyMappingExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,13 +46,22 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "02FF772518E32249002282D3"
-               BuildableName = "iOS Tests.xctest"
-               BlueprintName = "iOS Tests"
+               BlueprintIdentifier = "9A2A380E1AEA5A170021E97D"
+               BuildableName = "EasyMapping OSXTests.xctest"
+               BlueprintName = "EasyMapping OSXTests"
                ReferencedContainer = "container:EasyMappingExample.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "9A2A38041AEA5A170021E97D"
+            BuildableName = "EasyMapping.framework"
+            BlueprintName = "EasyMapping OSX"
+            ReferencedContainer = "container:EasyMappingExample.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -52,9 +75,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "02FF772518E32249002282D3"
-            BuildableName = "iOS Tests.xctest"
-            BlueprintName = "iOS Tests"
+            BlueprintIdentifier = "9A2A38041AEA5A170021E97D"
+            BuildableName = "EasyMapping.framework"
+            BlueprintName = "EasyMapping OSX"
             ReferencedContainer = "container:EasyMappingExample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -67,6 +90,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "9A2A38041AEA5A170021E97D"
+            BuildableName = "EasyMapping.framework"
+            BlueprintName = "EasyMapping OSX"
+            ReferencedContainer = "container:EasyMappingExample.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

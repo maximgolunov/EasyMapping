@@ -15,8 +15,12 @@
 #import "ManagedCar.h"
 #import "ManagedPhone.h"
 #import <CoreData/CoreData.h>
-#import <MagicalRecord/CoreData+MagicalRecord.h>
+#import <MagicalRecord/MagicalRecord.h>
 #import "EKManagedObjectMapper.h"
+#import "MagicalRecord+Setup.h"
+#import <MagicalRecord/NSManagedObjectContext+MagicalSaves.h>
+#import <MagicalRecord/NSManagedObject+MagicalFinders.h>
+#import <MagicalRecord/CoreData+MagicalRecord.h>
 
 SPEC_BEGIN(EKManagedObjectMapperSpec)
 
@@ -136,11 +140,12 @@ describe(@"EKManagedObjectMapper", ^{
                 oldCar.carID = @(1);
                 oldCar.year = @"1980";
                 oldCar.model = @"";
+                oldCar.createdAt = [NSDate date];
                 
                 [moc save:nil];
                 
                 externalRepresentation = @{ @"id": @(1), @"model": @"i30", };
-                car = [EKManagedObjectMapper objectFromExternalRepresentation:externalRepresentation withMapping:[ManagedMappingProvider carMapping] inManagedObjectContext:moc];
+                car = [EKManagedObjectMapper objectFromExternalRepresentation:externalRepresentation withMapping:[ManagedMappingProvider carWithDateMapping] inManagedObjectContext:moc];
             });
             
             specify(^{
@@ -154,13 +159,61 @@ describe(@"EKManagedObjectMapper", ^{
             specify(^{
                 [[car.year should] equal:oldCar.year];
             });
-            
+
+            specify(^{
+                [[car.createdAt should] equal:oldCar.createdAt];
+            });
+
             specify(^{
                 [[[ManagedCar MR_findAll] should] haveCountOf:1];
             });
             
         });
-        
+
+        context(@"replaces explicitly nil attributes", ^{
+
+            __block NSManagedObjectContext* moc;
+            __block ManagedCar *oldCar;
+            __block ManagedCar *car;
+            __block NSDictionary *externalRepresentation;
+
+            beforeEach(^{
+                moc = [NSManagedObjectContext MR_defaultContext];
+
+                oldCar = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([ManagedCar class]) inManagedObjectContext:moc];
+                oldCar.carID = @(1);
+                oldCar.year = @"1980";
+                oldCar.model = @"";
+                oldCar.createdAt = [NSDate date];
+
+                [moc save:nil];
+
+                externalRepresentation = [CMFixture buildUsingFixture:@"CarWithAttributesRemoved"];
+                car = [EKManagedObjectMapper objectFromExternalRepresentation:externalRepresentation withMapping:[ManagedMappingProvider carWithDateMapping] inManagedObjectContext:moc];
+            });
+
+            specify(^{
+                [[car.carID should] equal:oldCar.carID];
+            });
+
+            specify(^{
+                [[car.model should] beNil];
+            });
+
+            specify(^{
+                [[car.year should] equal:oldCar.year];
+            });
+
+            specify(^{
+                [[car.createdAt should] beNil];
+            });
+
+            specify(^{
+                [[[ManagedCar MR_findAll] should] haveCountOf:1];
+            });
+
+        });
+
         context(@"with root key", ^{
             
             __block NSManagedObjectContext* moc;

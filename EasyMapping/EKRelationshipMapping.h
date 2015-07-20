@@ -24,3 +24,4 @@
 - (NSDictionary *)extractObjectFromRepresentation:(NSDictionary *)representation;
 
 @end
+
